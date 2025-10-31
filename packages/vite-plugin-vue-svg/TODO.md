@@ -1,0 +1,2 @@
+- Use flat config instead of `overrides`
+- Pass all default attributes. Now it is only `fill` & `viewBox`

@@ -1,0 +1,29 @@
+{
+  "name": "@my/utils.vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "npm@10.9.0",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=22.21.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "files": [],
+  "exports": {
+    "./*": "./lib/*"
+  },
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {},
+  "overrides": {}
+}
