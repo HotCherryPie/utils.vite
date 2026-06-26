@@ -1,9 +1,10 @@
-import { pathToFileURL } from 'node:url';
-
 import * as glCodeowners from '@gitlab/codeowners';
 import path from 'pathe';
 import type { Plugin } from 'vite';
 import { normalizePath } from 'vite';
+
+// eslint-disable-next-line sonar/slow-regex
+const removeQueryAndHashFromPath = (it: string) => it.replace(/[?#].*$/, '');
 
 export const plugin: () => Promise<Plugin> = async () => {
   const PUBLIC_ID = 'virtual:file-meta';
@@ -28,8 +29,7 @@ export const plugin: () => Promise<Plugin> = async () => {
         return; // null
       }
 
-      // Strips query and hash from path.
-      const location = pathToFileURL(normalizePath(importer)).pathname;
+      const location = removeQueryAndHashFromPath(normalizePath(importer));
 
       return `${RESOLVED_PREFIX}?location=${encodeURIComponent(location)}`;
     },
@@ -50,7 +50,10 @@ export const plugin: () => Promise<Plugin> = async () => {
 
       return {
         code: `
-          export const location = ${JSON.stringify(locationRelativeToCwd)};
+          export const location = {
+            absolute: ${JSON.stringify(location)},
+            relative: ${JSON.stringify(locationRelativeToCwd)},
+          };
           export const owners = {
             codeowners: ${JSON.stringify(owners)},
           };
