@@ -1,0 +1,27 @@
+{
+  "name": "@my/vite-plugin-file-meta",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24.14.1"
+  },
+  "exports": {
+    "./*": "./lib/*"
+  },
+  "dependencies": {
+    "@gitlab/codeowners": "~0.2.7",
+    "pathe": "~2.0.3"
+  },
+  "devDependencies": {
+    "vite": "~8.1.0"
+  },
+  "peerDependencies": {
+    "vite": ">=8.1.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  }
+}

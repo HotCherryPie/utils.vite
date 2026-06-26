@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "@my/configs.js/tsconfig.base.json",
+    "@my/configs.js/tsconfig.base.node@24.json"
+  ],
+  "include": ["./packages/*/lib/**/*.*"],
+
+  "compilerOptions": {
+    // Without this `*.tsbuildinfo` file will be created on project root.
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo",
+
+    "composite": true,
+    "noEmit": true,
+
+    "allowJs": true
+  }
+}

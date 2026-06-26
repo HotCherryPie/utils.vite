@@ -1,0 +1,54 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+    // "source.fixAll.stylelint": "always"
+    // "source.fixAll.prettier": "always"
+  },
+
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+
+  // "git.branchProtection": ["master"],
+
+  "json.schemaDownload.trustedDomains": {
+    "https://nodejs.org/docs/": true
+  },
+
+  "prettier.enable": true,
+  "prettier.useEditorConfig": false,
+
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.runtime": "node",
+
+  "cSpell.language": "en-001",
+  "cSpell.words": ["browserslistrc", "nolyfill", "sonarjs", "uncategorized"],
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

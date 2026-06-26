@@ -1,0 +1,12 @@
+{
+  "name": "@my/vite-plugin-vue-svg",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24.14.1"
+  },
+  "exports": {
+    "./*": "./lib/*"
+  }
+}

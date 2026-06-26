@@ -1,7 +1,7 @@
-import path from 'pathe';
-import type { Plugin } from 'vite';
-import { parse, atRule } from 'postcss';
 import { minimatch } from 'minimatch';
+import path from 'pathe';
+import { parse, atRule } from 'postcss';
+import type { Plugin } from 'vite';
 
 export interface FileConfig {
   /** @default undefined */
@@ -97,10 +97,10 @@ function resolveConfigForEntry(id: string, rules: Rule[]) {
     return it.files(id);
   });
 
-  const config = {
+  const config: Required<FileConfig> = {
     layer: undefined,
     allowCustomLayers: false,
-  } satisfies Required<FileConfig>;
+  };
 
   for (const it of relevantRules) {
     Object.assign(config, it);

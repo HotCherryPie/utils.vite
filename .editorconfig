@@ -1,0 +1,15 @@
+# This file mainly for external editors, like on GitHub or GitLab
+#  and should not affect code-quality tooling, like ESLint & Prettier!
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false

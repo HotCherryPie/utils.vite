@@ -1,16 +1,21 @@
 {
+  "//": "READ package.json.md BEFORE ANY CHANGES!",
   "name": "@my/utils.vite",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "npm@10.9.0",
-  "engineStrict": true,
   "engines": {
-    "node": ">=22.21.0"
+    "node": ">=24.14.1"
   },
   "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=24.14.1",
+      "onFail": "error"
+    },
     "packageManager": {
       "name": "npm",
+      "version": ">=11.13.0",
       "onFail": "error"
     }
   },
@@ -18,12 +23,10 @@
     "packages/*"
   ],
   "files": [],
-  "exports": {
-    "./*": "./lib/*"
-  },
   "scripts": {},
   "dependencies": {},
-  "devDependencies": {},
-  "peerDependencies": {},
-  "overrides": {}
+  "devDependencies": {
+    "@my/configs.js": "git+https://github.com/HotCherryPie/configs.js.git#semver:v0.0.0-alpha-18"
+  },
+  "peerDependencies": {}
 }

@@ -1,0 +1,2 @@
+# Specify multiple Code Owners to a specific file:
+src/**/* @core-team
