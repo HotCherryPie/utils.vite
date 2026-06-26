@@ -6,7 +6,7 @@ import './style.css';
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div style="font-size: 24px;">
     <p>
-      Hello form <code>${location.absolute}</code>
+      Hello form <code>${location.relative}</code>
     </p>
     <p>
       Owners are <code>${owners.codeowners.join(', ')}</code>
