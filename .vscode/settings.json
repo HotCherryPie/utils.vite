@@ -10,6 +10,11 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    // https://docs.npmjs.com/cli/v6/configuring-npm/npmrc
+    //  "All npm config files are an ini-formatted list of key = value parameters"
+    ".npmrc": "ini"
+  },
 
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,

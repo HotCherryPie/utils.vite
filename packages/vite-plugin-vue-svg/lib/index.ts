@@ -1,13 +1,12 @@
 import { promises as fs } from 'node:fs';
 import nodePath from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { minimatch } from 'minimatch';
 import { optimize as optimizeSvg } from 'svgo';
 import type { Plugin } from 'vite';
 import { normalizePath } from 'vite';
 
-import type { SvgLoaderOptions } from './types';
+import type { SvgLoaderOptions } from './types.ts';
 
 const SVG_REGEX = /\.svg(\?(url|component))?$/;
 
@@ -61,7 +60,7 @@ export const vueSvg = (loaderOptions: SvgLoaderOptions = {}): Plugin => {
       }
 
       const [content] =
-        // eslint-disable-next-line sonarjs/slow-regex
+        // eslint-disable-next-line sonar/super-linear-regex
         /(?<=svg.*>(\s|\n)*)<.+>(?=(\s|\n)*<\/\s*svg)/gs.exec(svg) ?? [];
 
       const [, viewBox = '0 0 0 0'] =
@@ -71,7 +70,7 @@ export const vueSvg = (loaderOptions: SvgLoaderOptions = {}): Plugin => {
       const iconBasePath =
         resolvedConfig.wrapperComponentPath ??
         nodePath.resolve(
-          nodePath.dirname(fileURLToPath(import.meta.url)),
+          import.meta.dirname,
           './default-wrapper.vue',
         );
 
