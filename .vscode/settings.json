@@ -25,6 +25,8 @@
     "https://nodejs.org/docs/": true
   },
 
+  "npm.scriptRunner": "npm",
+
   "prettier.enable": true,
   "prettier.useEditorConfig": false,
 

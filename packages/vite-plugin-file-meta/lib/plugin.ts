@@ -1,16 +1,17 @@
+/* eslint-disable unicorn/no-this-outside-of-class */
 import * as glCodeowners from '@gitlab/codeowners';
 import path from 'pathe';
 import type { Plugin } from 'vite';
 import { normalizePath } from 'vite';
 
-// eslint-disable-next-line sonar/slow-regex
+const MODULE_ID = 'virtual:file-meta';
+const RESOLVED_MODULE_ID = `\0${MODULE_ID}`;
+
+// eslint-disable-next-line sonar/super-linear-regex
 const removeQueryAndHashFromPath = (it: string) => it.replace(/[?#].*$/, '');
 
 export const plugin: () => Promise<Plugin> = async () => {
-  const PUBLIC_ID = 'virtual:file-meta';
-  const RESOLVED_PREFIX = `\0${PUBLIC_ID}`;
   const cwd = normalizePath(process.cwd());
-
   const codeowners = await glCodeowners.parse(
     path.resolve(cwd, '.gitlab/CODEOWNERS'),
   );
@@ -20,27 +21,26 @@ export const plugin: () => Promise<Plugin> = async () => {
     enforce: 'pre',
 
     resolveId(source, importer) {
-      if (source !== PUBLIC_ID) return; // null
+      if (source !== MODULE_ID) return; // null
 
       if (!importer) {
-        this.error(`"${PUBLIC_ID}" must be imported from a real file.`);
+        this.error(`"${MODULE_ID}" must be imported from a real file.`);
 
         // @ts-expect-error only for type narrowing
         return; // null
       }
 
-      const location = removeQueryAndHashFromPath(normalizePath(importer));
+      const searchParameters = new URLSearchParams([
+        ['location', removeQueryAndHashFromPath(normalizePath(importer))],
+      ]);
 
-      return `${RESOLVED_PREFIX}?location=${encodeURIComponent(location)}`;
+      return `${RESOLVED_MODULE_ID}?${searchParameters.toString()}`;
     },
 
     load(id) {
-      if (!id.startsWith(RESOLVED_PREFIX)) return; // null
+      if (!id.startsWith(RESOLVED_MODULE_ID)) return; // null
 
-      const queryIndex = id.indexOf('?');
-      const query = queryIndex === -1 ? '' : id.slice(queryIndex + 1);
-      const searchParameters = new URLSearchParams(query);
-
+      const searchParameters = new URL(id).searchParams;
       const location = searchParameters.get('location') ?? undefined;
       const locationRelativeToCwd = location?.replace(`${cwd}/`, '');
       const owners =
@@ -49,6 +49,17 @@ export const plugin: () => Promise<Plugin> = async () => {
         : codeowners.getOwners(locationRelativeToCwd);
 
       return {
+        // Doesn't really do anything for this kind of module, but anyways [^_^]
+        moduleSideEffects: false,
+
+        // TODO: add
+        //  - dirname   - name of directory
+        //  - filename  - name of file
+        //  - dirpath   - absolute path to directory
+        //  - filepath  - absolute path to file
+        //  - directory - relative path to directory
+        //  - location  - relative path to file
+        //  - extension
         code: `
           export const location = {
             absolute: ${JSON.stringify(location)},
@@ -58,7 +69,6 @@ export const plugin: () => Promise<Plugin> = async () => {
             codeowners: ${JSON.stringify(owners)},
           };
         `,
-        map: { mappings: '' },
       };
     },
   };

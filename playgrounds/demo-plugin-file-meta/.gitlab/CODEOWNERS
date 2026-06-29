@@ -1,2 +1,1 @@
-# Specify multiple Code Owners to a specific file:
-src/**/* @core-team
+src/**/* @core-team-gitlab
