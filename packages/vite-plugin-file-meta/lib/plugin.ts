@@ -10,6 +10,7 @@ const RESOLVED_MODULE_ID = `\0${MODULE_ID}`;
 // eslint-disable-next-line sonar/super-linear-regex
 const removeQueryAndHashFromPath = (it: string) => it.replace(/[?#].*$/, '');
 
+// https://vite.dev/guide/api-plugin#virtual-modules-convention
 export const plugin: () => Promise<Plugin> = async () => {
   const cwd = normalizePath(process.cwd());
   const codeowners = await glCodeowners.parse(
