@@ -1,4 +1,4 @@
-import { branch } from 'virtual:env-meta';
+import * as envMeta from 'virtual:env-meta';
 import * as fileMeta from 'virtual:file-meta';
 
 export const render = () => {
@@ -7,11 +7,15 @@ export const render = () => {
     <div style="font-size:24px; display:flex; flex-direction:column; gap:8px;">
       <h3>File Meta</h3>
       ${Object.entries(fileMeta)
-        .map(([k, v]) => `<div>${k}: <code>${v}</code></div>`)
+        .map(([k, v]) => `<div>${k}: <code>${v.toString()}</code></div>`)
         .join('\n')}
 
       <h3>Env Meta</h3>
-      <div>Branch <code>${branch ?? ''}</code></div>
+       ${Object.entries(envMeta)
+         .map(
+           ([k, v]) => `<div>${k}: <code>${v?.toString() ?? '-'}</code></div>`,
+         )
+         .join('\n')}
     </div>
   `;
 };

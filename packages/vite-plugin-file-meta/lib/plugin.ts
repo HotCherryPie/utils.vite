@@ -18,7 +18,7 @@ export const plugin: () => Promise<Plugin> = async () => {
   );
 
   return {
-    name: 'file-meta',
+    name: 'vite-plugin-file-meta',
     enforce: 'pre',
 
     resolveId(source, importer) {
@@ -43,33 +43,34 @@ export const plugin: () => Promise<Plugin> = async () => {
 
       const searchParameters = new URL(id).searchParams;
       const filepath = searchParameters.get('location') ?? undefined;
-      const locationRelativeToCwd = filepath?.replace(`${cwd}/`, '');
-      const owners =
-        locationRelativeToCwd === undefined ?
-          []
-        : codeowners.getOwners(locationRelativeToCwd);
 
-      const dirpath =
-        filepath === undefined ? undefined : path.dirname(filepath);
-      const filename =
-        filepath === undefined ? undefined : path.basename(filepath);
-      const dirname =
-        dirpath === undefined ? undefined : dirpath.split('/').at(-1);
-      const location =
-        dirpath === undefined ? undefined : dirpath.replace(`${cwd}/`, '');
+      if (filepath === undefined) {
+        this.error('[vite-plugin-file-meta] Missing id location.');
+
+        // @ts-expect-error only for type narrowing
+        return;
+      }
+
+      const locationRelativeToCwd = filepath.replace(`${cwd}/`, '');
+      const owners = codeowners.getOwners(locationRelativeToCwd);
+
+      const dirpath = path.dirname(filepath);
+      const filename = path.basename(filepath);
+      const dirname = dirpath.split('/').at(-1);
+      const location = dirpath.replace(`${cwd}/`, '');
+      const extension = path.extname(filename);
 
       return {
         // Doesn't really do anything for this kind of module, but anyways [^_^]
         moduleSideEffects: false,
 
-        // TODO: add
         //  - dirname   - name of directory
         //  - filename  - name of file
         //  - dirpath   - absolute path to directory
         //  - filepath  - absolute path to file
         //  - directory - relative path to directory
         //  - location  - relative path to file
-        //  - extension
+        //  - extension - extension of the file
         code: `
           export const dirname = ${JSON.stringify(dirname)};
           export const filename = ${JSON.stringify(filename)};
@@ -77,6 +78,7 @@ export const plugin: () => Promise<Plugin> = async () => {
           export const filepath = ${JSON.stringify(filepath)};
           export const directory = ${JSON.stringify(location)};
           export const location = ${JSON.stringify(locationRelativeToCwd)};
+          export const extension = ${JSON.stringify(extension)};
 
           export const codeowners = ${JSON.stringify(owners)};
 
