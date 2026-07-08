@@ -1,6 +1,6 @@
 {
   "//": "READ package.json.md BEFORE ANY CHANGES!",
-  "name": "@my/utils.vite",
+  "name": "@(67)/utils.vite",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -26,7 +26,11 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "@my/configs.js": "github:HotCherryPie/configs.js#v0.0.0-alpha-19"
+    "@(67)/configs.js": "github:HotCherryPie/configs.js#v0.0.0-alpha-22",
+    "@types/node": "~24.13.2",
+    "eslint": "~10.6.0",
+    "prettier": "~3.9.4",
+    "typescript": "~6.0.3"
   },
   "peerDependencies": {}
 }

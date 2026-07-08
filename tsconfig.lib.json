@@ -1,7 +1,7 @@
 {
   "extends": [
-    "@my/configs.js/tsconfig.base.json",
-    "@my/configs.js/tsconfig.base.node@24.json"
+    "@(67)/configs.js/tsconfig.base.json",
+    "@(67)/configs.js/tsconfig.base.node@24.json"
   ],
   "include": ["./packages/*/lib/**/*.*"],
 

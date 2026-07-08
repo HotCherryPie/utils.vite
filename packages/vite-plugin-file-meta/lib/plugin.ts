@@ -18,7 +18,7 @@ export const plugin: () => Promise<Plugin> = async () => {
   );
 
   return {
-    name: 'vite-plugin-file-meta',
+    name: 'file-meta',
     enforce: 'pre',
 
     resolveId(source, importer) {

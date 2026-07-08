@@ -1,5 +1,5 @@
 {
-  "name": "@(67)/vite-plugin-file-meta",
+  "name": "@(67)/vite-plugin-env-meta",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,6 @@
     "./*": "./lib/*"
   },
   "dependencies": {
-    "@gitlab/codeowners": "~0.2.7",
     "pathe": "~2.0.3"
   },
   "devDependencies": {
