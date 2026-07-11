@@ -1,5 +1,5 @@
 {
-  "$schema": "https://nodejs.org/docs/latest-v25.x/node-config-schema.json",
+  "$schema": "https://nodejs.org/docs/latest-v26.x/node-config-schema.json",
   "permission": {
     "permission": true,
     "allow-net": false,
